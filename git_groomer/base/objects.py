@@ -4,19 +4,27 @@ from typing import List
 
 import maya
 
-from git_groomer.clients.base import BaseGitClient
-
 
 class Commit:
-    def __init__(self, short_id: str, long_id: str, author: str, title: str, message: str, created_on: datetime,
-                 parent_ids: List[str]):
-        self.short_id = short_id
+    def __init__(self, long_id: str = None, author: str = None, title: str = None, message: str = None,
+                 created_on: datetime = None,
+                 parent_ids: List[str] = None):
         self.long_id = long_id
         self.author = author
         self.message = message
         self.created_on = created_on
-        self.parent_ids = parent_ids
+        self.parent_ids = parent_ids or []
         self.title = title
+
+    @property
+    def short_id(self):
+        return self.long_id[:7]
+
+    def __str__(self):
+        return f"{self.short_id}\t{self.title}\t{self.author}"
+
+    def __repr__(self):
+        return f"<Commit {self.short_id}\t{self.title}\t{self.author} >"
 
 
 class Branch:
@@ -33,7 +41,7 @@ class Branch:
 
 
 class Repository:
-    def __init__(self, name: str, gitclient: BaseGitClient):
+    def __init__(self, name: str, gitclient):
         self.name = name
         self.gitclient = gitclient
         self._branches = None

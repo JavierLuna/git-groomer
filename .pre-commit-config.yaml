@@ -3,3 +3,5 @@ repos:
     rev: v1.2.3
     hooks:
     -   id: detect-private-key
+    -   id: flake8
+        args: [--max-line-length=120]

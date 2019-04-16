@@ -1,5 +1,5 @@
-from git_groomer.clients.gitlab.client import GitlabClient
-from git_groomer.models import Repository
+from git_groomer.gitlab.client import GitlabClient
+from git_groomer.base.objects import Repository
 
 
 class GitlabRepository(Repository):
