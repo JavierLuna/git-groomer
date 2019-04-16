@@ -47,8 +47,8 @@ class Repository:
         self._branches = None
 
     @staticmethod
-    def _filter_branches(branches: List[Branch], author: str = None, older_than: int = None, newer_than: int = None,
-                         name: str = None, merged: bool = None) -> List[Branch]:
+    def filter_branches(branches: List[Branch], author: str = None, older_than: int = None, newer_than: int = None,
+                        name: str = None, merged: bool = None) -> List[Branch]:
         filters = []
 
         if author is not None:
@@ -73,10 +73,10 @@ class Repository:
 
         return [branch for branch in branches if all(f(branch) for f in filters)]
 
-    def filter_branches(self, author: str = None, older_than: int = None, newer_than: int = None, name: str = None,
-                        merged: bool = None):
-        return self._filter_branches(self.branches, author=author, older_than=older_than, newer_than=newer_than,
-                                     name=name, merged=merged)
+    def filter(self, author: str = None, older_than: int = None, newer_than: int = None, name: str = None,
+               merged: bool = None):
+        return self.filter_branches(self.branches, author=author, older_than=older_than, newer_than=newer_than,
+                                    name=name, merged=merged)
 
     @property
     def branches(self):
