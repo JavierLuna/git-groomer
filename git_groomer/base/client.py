@@ -16,10 +16,10 @@ class BaseGitClient:
         return self._parse_branches(raw_branches)
 
     def _get_raw_branches(self) -> List[dict]:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     def _make_headers(self) -> dict:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     def _get(self, url: str, params: Optional[dict] = None, headers: Optional[dict] = None) -> requests.Response:
         params = params or {}
@@ -36,7 +36,7 @@ class BaseGitClient:
         return [self._parse_branch(raw_branch) for raw_branch in raw_branches]
 
     def _parse_branch(self, raw_branch: dict) -> Branch:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     def delete_branches(self, branches: List[Union[Branch, str]]) -> List[bool]:
         return [self.delete_single_branch(branch) for branch in branches]
@@ -46,4 +46,4 @@ class BaseGitClient:
         return self._delete_branch(branch_name)
 
     def _delete_branch(self, branch_name: str) -> bool:
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover

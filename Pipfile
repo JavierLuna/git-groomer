@@ -8,6 +8,7 @@ pre-commit = "*"
 pytest = "*"
 pytest-mock = "*"
 requests-mock = "*"
+coverage = "*"
 
 [packages]
 requests = "*"
