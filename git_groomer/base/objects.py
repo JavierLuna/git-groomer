@@ -28,7 +28,7 @@ class Commit:
 
 
 class Branch:
-    def __init__(self, name: str, merged: bool, last_commit: Commit):
+    def __init__(self, name: str, merged: bool = None, last_commit: Commit = None):
         self.name = name
         self.merged = merged
         self.last_commit = last_commit
@@ -41,9 +41,9 @@ class Branch:
 
 
 class Repository:
-    def __init__(self, name: str, gitclient):
+    def __init__(self, name: str, git_client):
         self.name = name
-        self.gitclient = gitclient
+        self.git_client = git_client
         self._branches = None
 
     @staticmethod
@@ -60,10 +60,10 @@ class Repository:
         if older_than is not None:
             date_cutoff = maya.now() - maya.timedelta(days=older_than)
             date_cutoff = date_cutoff.datetime()
-            filters.append(lambda b: b.last_commit.created_on < date_cutoff)
+            filters.append(lambda b: b.last_commit.created_on <= date_cutoff)
 
         if newer_than is not None:
-            date_cutoff = maya.now() - maya.timedelta(days=older_than)
+            date_cutoff = maya.now() + maya.timedelta(days=newer_than)
             date_cutoff = date_cutoff.datetime()
             filters.append(lambda b: b.last_commit.created_on >= date_cutoff)
 
@@ -71,7 +71,7 @@ class Repository:
             regex = re.compile(name)
             filters.append(lambda b: regex.match(b.name))
 
-        return [branch for branch in branches if all(f(branch) for f in filters)]
+        return [branch for branch in branches if all(f(branch) for f in filters)] if filters else branches
 
     def filter(self, author: str = None, older_than: int = None, newer_than: int = None, name: str = None,
                merged: bool = None):
@@ -81,12 +81,8 @@ class Repository:
     @property
     def branches(self):
         if self._branches is None:
-            self._branches = self.gitclient.get_branches()
+            self.update_branches()
         return self._branches
 
-    @branches.setter
-    def branches(self, branches: List[Branch]):
-        self._branches = branches
-
     def update_branches(self):
-        self._branches = self.gitclient.get_branches()
+        self._branches = self.git_client.get_branches()
