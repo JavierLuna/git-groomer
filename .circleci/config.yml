@@ -1,12 +1,13 @@
 version: 2.1
 
 workflows:
-  tox_tests:
+  branch_tests:
     jobs:
       - unit_tests:
           version: "3.6"
       - unit_tests:
           version: "3.7"
+      - lax_static_analysis
 jobs:
 
   unit_tests:
@@ -30,3 +31,33 @@ jobs:
           command: |
             . env/bin/activate
             pytest
+
+  lax_static_analysis:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv env
+            . env/bin/activate
+            pipenv install --dev --ignore-pipfile
+            pip install coverage flake8 mypy
+      - run:
+          name: Linter
+          command: |
+            . env/bin/activate
+            flake8 git_groomer --max-line-lenght=120
+      - run:
+          name: Type hinting
+          command: |
+            . env/bin/activate
+            mypy - p git_groomer --ignore-missing-imports
+      - run:
+          name: Coverage
+          command: |
+            . env/bin/activate
+            coverage run setup.py test
+            coverage report --fail-under=85
+
