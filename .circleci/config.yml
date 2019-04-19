@@ -1,0 +1,23 @@
+version: 2.1
+
+workflows:
+  tox_tests:
+    jobs:
+      - tox_tests
+jobs:
+  tox_tests:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv env
+            . env/bin/activate
+            pip install pipenv
+            pipenv install --dev --ignore-pipfile
+      - run:
+          name: Run tox tests
+          command: |
+            tox
