@@ -3,11 +3,19 @@ version: 2.1
 workflows:
   tox_tests:
     jobs:
-      - tox_tests
+      - unit_tests:
+          version: "3.6"
+      - unit_tests:
+          version: "3.7"
 jobs:
-  tox_tests:
+
+  unit_tests:
+    parameters:
+      version:
+        type: string
+        default: latest
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:<< parameters.version >>
     steps:
       - checkout
       - run:
@@ -18,7 +26,7 @@ jobs:
             pip install pipenv
             pipenv install --dev --ignore-pipfile
       - run:
-          name: Run tox tests
+          name: Run tests
           command: |
-            . env/bin/activate
-            tox
+            . venv/bin/activate
+            pytest
