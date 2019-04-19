@@ -112,3 +112,5 @@ nohup.out
 
 #CSV files
 *.csv
+
+.pytest_cache/
