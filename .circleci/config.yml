@@ -53,7 +53,7 @@ jobs:
           name: Type hinting
           command: |
             . env/bin/activate
-            mypy - p git_groomer --ignore-missing-imports
+            mypy -p git_groomer --ignore-missing-imports
       - run:
           name: Coverage
           command: |
