@@ -11,11 +11,11 @@ pytest-mock = "*"
 pytest-freezegun = "*"
 requests-mock = "*"
 coverage = "*"
+tox = "*"
 
 [packages]
 requests = "*"
 maya = "*"
-
 
 [requires]
 python_version = "3.7"
