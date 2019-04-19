@@ -52,3 +52,14 @@ def test_gitlab_client_delete_branches_unknown_response_code_ko(mock_gitlab_clie
     requests_mock.delete(f"{mock_gitlab_client.base_url}/repository/branches/{branch_name}", text='', status_code=100)
     with pytest.raises(UnknownResponseException):
         mock_gitlab_client._delete_branch(branch_name)
+
+
+def test_gitlab_client_parse_branch_ok(mock_gitlab_client, mock_gitlab_branch):
+    branch = mock_gitlab_client._parse_branch(mock_gitlab_branch)
+    assert branch.name == mock_gitlab_branch['name']
+
+
+def test_gitlab_client_parse_branch_commit_ok(mock_gitlab_client, mock_gitlab_branch, mock_gitlab_commit):
+    branch = mock_gitlab_client._parse_branch(mock_gitlab_branch)
+    commit = branch.last_commit
+    assert commit.long_id == mock_gitlab_commit['id']
