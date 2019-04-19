@@ -48,7 +48,7 @@ jobs:
           name: Linter
           command: |
             . env/bin/activate
-            flake8 git_groomer --max-line-lenght=120
+            flake8 git_groomer --max-line-length=120
       - run:
           name: Type hinting
           command: |
