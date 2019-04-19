@@ -104,5 +104,5 @@ def test_repository_filter_branches_by_name_literal_string_regex(mock_repository
 
 def test_repository_filter_branches_by_name_literal_num_regex(mock_repository, mock_branch_pool):
     all_branches = set(mock_branch_pool.values())
-    result = mock_repository.filter_branches(all_branches, name='\d')
+    result = mock_repository.filter_branches(all_branches, name=r'\d')
     assert result == [mock_branch_pool['name_num']]
