@@ -88,3 +88,21 @@ def test_repository_filter_branches_by_newer_than(mock_repository, mock_branch_p
     all_branches = set(mock_branch_pool.values())
     result = mock_repository.filter_branches(all_branches, newer_than=1)
     assert result == [mock_branch_pool['newer_than']]
+
+
+def test_repository_filter_branches_by_merged(mock_repository, mock_branch_pool):
+    all_branches = set(mock_branch_pool.values())
+    result = mock_repository.filter_branches(all_branches, merged=True)
+    assert result == [mock_branch_pool['merged']]
+
+
+def test_repository_filter_branches_by_name_literal_string_regex(mock_repository, mock_branch_pool):
+    all_branches = set(mock_branch_pool.values())
+    result = mock_repository.filter_branches(all_branches, name='test')
+    assert result == [mock_branch_pool['name_string']]
+
+
+def test_repository_filter_branches_by_name_literal_num_regex(mock_repository, mock_branch_pool):
+    all_branches = set(mock_branch_pool.values())
+    result = mock_repository.filter_branches(all_branches, name='\d')
+    assert result == [mock_branch_pool['name_num']]

@@ -59,4 +59,4 @@ def mock_branch_pool(yesterday, today, tomorrow):
             'name_num': Branch('1', last_commit=Commit(created_on=today)),
             'name_string': Branch('test', last_commit=Commit(created_on=today)),
             'merged': Branch('merged', merged=True, last_commit=Commit(created_on=today)),
-            'not_merged': Branch('not_merged', merged=True, last_commit=Commit(created_on=today))}
+            'not_merged': Branch('not_merged', merged=False, last_commit=Commit(created_on=today))}
