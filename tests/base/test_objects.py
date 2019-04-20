@@ -58,6 +58,11 @@ def test_repository_update_branches_ok(mock_repository):
     assert mock_repository.git_client.get_branches.called
 
 
+def test_repository_delete_branches_ok(mock_repository):
+    mock_repository.delete_branches(["a", "b"])
+    assert mock_repository.git_client.delete_branches.called
+
+
 def test_repository_filter_uses_own_branches(mocker, mock_repository):
     mock_branches = 'test'
     mock_repository._branches = mock_branches

@@ -19,7 +19,7 @@ def mock_branch(mock_commit):
 
 @pytest.fixture
 def mock_git_client():
-    return type('MockedGitClient', (), {'get_branches': Mock(return_value=[])})
+    return type('MockedGitClient', (), {'get_branches': Mock(return_value=[]), 'delete_branches': Mock()})
 
 
 @pytest.fixture

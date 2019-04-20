@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from typing import List
+from typing import List, Union
 
 import maya
 
@@ -86,3 +86,6 @@ class Repository:
 
     def update_branches(self):
         self._branches = self.git_client.get_branches()
+
+    def delete_branches(self, branches: List[Union[Branch, str]]) -> List[bool]:
+        return self.git_client.delete_branches(branches)
