@@ -18,7 +18,11 @@ With git groomer, you can easily filter those kind of branches and delete them a
 
 ## Installation
 
-Project will be deployed to PyPi soon.
+`pip install git-groomer`
+or `pipenv install git-groomer`
+
+Current deployed version is still susceptible to API changes, or dependency changes (thinking about moving from `maya`to `dateutil`).
+Still, it is well tested and usable in every simple way.
 
 ## Example
 ````python
@@ -32,3 +36,10 @@ merged_branches = repo.filter(merged=True, older_than=4) # Get merged branches, 
 repo.delete_branches(merged_branches) # Delete them
 
 ````
+
+### Next steps
+
+Will investigate about moving from `maya` to `dateutil` as it seems that maya has a ton of subdependencies. 
+Here, `maya` is only used to parse dates and I don't think this project will need the other useful features the library offers.
+
+GitHub repo and client support are on their way, I just need the API to feel right first.
