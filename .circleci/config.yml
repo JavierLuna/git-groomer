@@ -3,12 +3,17 @@ version: 2.1
 workflows:
   branch_tests:
     jobs:
-      steps:
-        - unit_tests:
-            version: "3.6"
-        - unit_tests:
-            version: "3.7"
-        - lax_static_analysis
+      - unit_tests:
+          name: Python 3.6 unit tests
+          version: "3.6"
+      - unit_tests:
+          name: Python 3.7 unit tests
+          version: "3.7"
+      - lax_static_analysis:
+          name: Lax static analysis
+          requires:
+            - Python 3.6 unit tests
+            - Python 3.7 unit tests
 jobs:
 
   unit_tests:
