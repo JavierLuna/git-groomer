@@ -2,12 +2,13 @@ version: 2.1
 
 workflows:
   branch_tests:
-    steps:
-      - unit_tests:
-          version: "3.6"
-      - unit_tests:
-          version: "3.7"
-      - lax_static_analysis
+    jobs:
+      steps:
+        - unit_tests:
+            version: "3.6"
+        - unit_tests:
+            version: "3.7"
+        - lax_static_analysis
 jobs:
 
   unit_tests:
