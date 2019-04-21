@@ -1,5 +1,5 @@
+import datetime
 import freezegun
-import maya
 import pytest
 
 
@@ -12,14 +12,14 @@ def freeze_time(request):
 
 @pytest.fixture
 def today():
-    return maya.now().datetime()
+    return datetime.datetime.now()
 
 
 @pytest.fixture
 def tomorrow(today):
-    return today + maya.timedelta(days=1)
+    return today + datetime.timedelta(days=1)
 
 
 @pytest.fixture
 def yesterday(today):
-    return today - maya.timedelta(days=1)
+    return today - datetime.timedelta(days=1)

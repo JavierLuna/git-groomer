@@ -1,7 +1,7 @@
 import os
 from typing import List, Optional
 
-import maya
+from dateutil.parser import parse
 
 from git_groomer.base.client import BaseGitClient
 from git_groomer.base.exceptions import AuthFailedException, UnknownResponseException
@@ -35,7 +35,7 @@ class GitlabClient(BaseGitClient):
         last_branch_commit = Commit(long_id=last_branch_commit['id'],
                                     author=last_branch_commit['author_email'],
                                     title=last_branch_commit['title'], message=last_branch_commit['message'],
-                                    created_on=maya.parse(last_branch_commit['authored_date']).datetime(),
+                                    created_on=parse(last_branch_commit['authored_date']),
                                     parent_ids=last_branch_commit['parent_ids'])
         branch = Branch(name=raw_branch['name'], merged=raw_branch['merged'], last_commit=last_branch_commit)
         return branch

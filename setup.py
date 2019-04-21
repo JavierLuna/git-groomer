@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='git-groomer',
-    version='0.0.0a1',
+    version='0.0.0a2',
     description='Tool to take good care of your git repository.',
     url='https://github.com/JavierLuna/git-groomer',
     author='Javier Luna Molina',
     author_email='javierlunamolina@gmail.com',
-    install_requires=['requests', 'maya'],
+    install_requires=['requests', 'python-dateutil'],
     setup_require=['pytest-runner'],
     tests_require=["pytest", "pytest-mock", "pytest-freezegun", "requests-mock"],
     test_suite='tests',

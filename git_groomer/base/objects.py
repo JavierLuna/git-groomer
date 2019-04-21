@@ -1,8 +1,6 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Union
-
-import maya
 
 
 class Commit:
@@ -58,13 +56,11 @@ class Repository:
             filters.append(lambda b: b.merged == merged)
 
         if older_than is not None:
-            date_cutoff = maya.now() - maya.timedelta(days=older_than)
-            date_cutoff = date_cutoff.datetime()
+            date_cutoff = datetime.now() - timedelta(days=older_than)
             filters.append(lambda b: b.last_commit.created_on <= date_cutoff)
 
         if newer_than is not None:
-            date_cutoff = maya.now() + maya.timedelta(days=newer_than)
-            date_cutoff = date_cutoff.datetime()
+            date_cutoff = datetime.now() + timedelta(days=newer_than)
             filters.append(lambda b: b.last_commit.created_on >= date_cutoff)
 
         if name is not None:
