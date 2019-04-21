@@ -1,0 +1,16 @@
+repository:
+  project_name: Example
+  project_id: 1234
+  host_type: Gitlab
+  token_from: GITLAB_API_TOKEN
+  grooming_rules:
+    - hotfixes
+    - merged_branches
+
+grooming_rules:
+  hotfixes:
+    name: "hotfix/.*"
+    older_than: 5
+  merged_branches:
+    merged: True
+    older_than: 3

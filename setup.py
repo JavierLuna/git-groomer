@@ -21,5 +21,8 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     keywords='git repository gitlab git-grooming grooming groom branch commit repo ',
-    packages=find_packages(exclude=['tests'])
+    packages=find_packages(exclude=['tests']),
+    entry_points={
+        "console_scripts": ["git-groomer = git_groomer.cli:main"]
+    }
 )
